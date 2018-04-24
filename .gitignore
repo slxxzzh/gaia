@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.git/
+*.idea/
+*.tar.gz
+*.apk
+*.idea
+*.lock
+npm-debug.log
+yarn-error.logc
