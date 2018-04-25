@@ -1,0 +1,19 @@
+{
+    "extends": "standard",
+    "plugins": ["html"],
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "$": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        "indent": 2,
+        "eqeqeq": "error",
+        "space-infix-ops": "error",
+        "space-before-function-paren": "error",
+        "key-spacing": "error"
+    }
+}
