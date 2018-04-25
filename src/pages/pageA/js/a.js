@@ -1,7 +1,7 @@
 import moduleA from 'common/js/module'
 import '../css/a.css'
 
-console.log('css', css)
+console.log('css')
 console.log('i am a')
 console.log(moduleA)
 console.log($('.a').addClass('new add'))

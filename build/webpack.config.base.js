@@ -14,14 +14,14 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const devServer = {
+const devServer = isDev ? {
   contentBase: path.join(__dirname, '../dist'),
   compress: true,
   port: 9000,
   host: '0.0.0.0',
   hot: true,
   hotOnly: true
-}
+} : {}
 
 const baseConfig = {
   entry: {
@@ -66,7 +66,6 @@ const baseConfig = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -102,6 +101,8 @@ if (!isDev) {
     },
     parallel: true
   }))
+} else {
+  baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
 module.exports = merge([baseConfig].concat(pages))
