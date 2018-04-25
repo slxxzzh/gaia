@@ -1,6 +1,7 @@
 import moduleA from 'components/module.js'
-import '../css/a.css'
+import '../css/a.less'
 
+console.log('css', css)
 console.log('i am a')
 console.log(moduleA)
 console.log($('.a').addClass('new add'))
