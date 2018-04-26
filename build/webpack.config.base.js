@@ -1,10 +1,9 @@
 'use strict'
 const merge = require('webpack-merge')
 const webpack = require('webpack')
-// const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextWebpack = require('extract-text-webpack-plugin')
 const path = require('path')
-const pages = require('./pages.config.js')
+const pages = require('./pages-template.js')
 const PurifyCss = require('purifycss-webpack')
 const glob = require('glob-all')
 
