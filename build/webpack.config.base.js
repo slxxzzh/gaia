@@ -23,6 +23,33 @@ const devServer = isDev ? {
   hotOnly: true
 } : {}
 
+const cssLoader = isDev
+  ? [
+    {
+      loader: 'style-loader'
+    },
+    {
+      loader: 'css-loader'
+    },
+    {
+      loader: 'less-loader'
+    }
+  ]
+  : ExtractTextWebpack.extract({
+    fallback: 'style-loader',
+    use: [
+      {
+        loader: 'css-loader',
+        options: {
+          minimize: true
+        }
+      },
+      {
+        loader: 'less-loader'
+      }
+    ]
+  })
+
 const baseConfig = {
   entry: {
     vender: ['jquery']
@@ -49,18 +76,8 @@ const baseConfig = {
         loader: 'babel-loader'
       },
       {
-        test: /\.css$/,
-        use: ExtractTextWebpack.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            }
-          ]
-        })
+        test: /\.less$/,
+        use: cssLoader
       }
     ]
   },
