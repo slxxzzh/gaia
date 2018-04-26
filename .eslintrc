@@ -14,6 +14,7 @@
         "eqeqeq": "error",
         "space-infix-ops": "error",
         "space-before-function-paren": "error",
-        "key-spacing": "error"
+        "key-spacing": "error",
+        "no-undef": "off"
     }
 }

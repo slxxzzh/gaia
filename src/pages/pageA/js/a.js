@@ -15,4 +15,3 @@ function hello (params) {
 hello('params')
 
 export { hello }
-
