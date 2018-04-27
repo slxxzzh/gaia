@@ -4,8 +4,6 @@ const webpack = require('webpack')
 const path = require('path')
 const pages = require('./test-template.js')
 
-const isDev = process.env.NODE_ENV === 'development'
-
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -20,18 +18,16 @@ const devServer = {
 }
 
 const cssLoader = [
-    {
-      loader: 'style-loader'
-    },
-    {
-      loader: 'css-loader'
-    },
-    {
-      loader: 'less-loader'
-    }
-  ]
- 
-
+  {
+    loader: 'style-loader'
+  },
+  {
+    loader: 'css-loader'
+  },
+  {
+    loader: 'less-loader'
+  }
+]
 const baseConfig = {
   output: {
     path: path.resolve(__dirname, '../pro-test'),
@@ -51,7 +47,7 @@ const baseConfig = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'  
+        loader: 'babel-loader'
       },
       {
         test: /\.less$/,

@@ -35,7 +35,7 @@ const pages = [
     },
     template: resolve('/src/pages/pageA/indexA.html'),
     name: 'a',
-    chunks: ['vender', 'a']
+    chunks: ['vender', 'global', 'a']
   }),
 
   generatePage({
@@ -45,7 +45,7 @@ const pages = [
     },
     template: resolve('/src/pages/pageB/indexB.html'),
     name: 'b',
-    chunks: ['vender', 'b']
+    chunks: ['vender', 'global', 'b']
   }),
 
   generatePage({
@@ -55,7 +55,7 @@ const pages = [
     },
     template: resolve('/src/pages/pageC/indexC.html'),
     name: 'c',
-    chunks: ['vender', 'c']
+    chunks: ['vender', 'global', 'c']
   })
 ]
 module.exports = pages

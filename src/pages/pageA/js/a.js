@@ -14,4 +14,8 @@ function hello (params) {
 }
 hello('params')
 
+$('#datepicker').datepicker({
+  inline: true
+})
+
 export { hello }

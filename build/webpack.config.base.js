@@ -2,6 +2,7 @@
 const merge = require('webpack-merge')
 const webpack = require('webpack')
 const ExtractTextWebpack = require('extract-text-webpack-plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const pages = require('./pages-template.js')
 const PurifyCss = require('purifycss-webpack')
@@ -13,14 +14,16 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const devServer = isDev ? {
-  contentBase: path.join(__dirname, '../dist'),
-  compress: true,
-  port: 9000,
-  host: '0.0.0.0',
-  hot: true,
-  hotOnly: true
-} : {}
+const devServer = isDev
+  ? {
+    contentBase: path.join(__dirname, '../dist'),
+    compress: true,
+    port: 9000,
+    host: '0.0.0.0',
+    hot: true,
+    hotOnly: true
+  }
+  : {}
 
 const cssLoader = isDev
   ? [
@@ -44,19 +47,47 @@ const cssLoader = isDev
         }
       },
       {
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          plugins: [require('postcss-cssnext')()]
+        }
+      },
+      {
         loader: 'less-loader'
       }
     ]
   })
-
+const fileLoader = path => {
+  return isDev
+    ? [
+      {
+        loader: 'file-loader',
+        options: {
+          name: 'css/images/[name]-[hash:5].[ext]'
+        }
+      }
+    ]
+    : [
+      {
+        loader: 'url-loader',
+        options: {
+          name: 'css/images/[name]-[hash:5].[ext]',
+          limit: 1000
+        }
+      }
+    ]
+}
 const baseConfig = {
   entry: {
-    vender: ['jquery']
+    vender: ['jquery'],
+    global: resolve('src/common/js/global.js')
   },
 
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: isDev ? 'js/[name].[hash].js' : 'js/[name].[chunkhash].js'
+    filename: isDev ? 'js/[name].[hash].js' : 'js/[name].[chunkhash].js',
+    publicPath: '/'
   },
 
   resolve: {
@@ -75,8 +106,23 @@ const baseConfig = {
         loader: 'babel-loader'
       },
       {
-        test: /\.less$/,
+        test: /\.(less|css)$/,
         use: cssLoader
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: fileLoader().concat(
+          !isDev
+            ? {
+              loader: 'img-loader'
+            }
+            : []
+        )
+      },
+
+      {
+        test: /\.(eot|woff2?|ttf|svg)$/,
+        use: fileLoader()
       }
     ]
   },
@@ -100,23 +146,34 @@ const baseConfig = {
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vender',
+      name: ['vender', 'global'],
       minChunks: Infinity
     }),
     // 引用jq
     new webpack.ProvidePlugin({
-      $: 'jquery'
-    })
+      $: 'jquery',
+      jQuery: 'jquery',
+      "window.jQuery": 'jquery'
+    }),
+
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: resolve('src/common/js/jquery-ui.min.js'),
+    //     to: resolve('dist/js'),
+    //   }
+    // ])
   ]
 }
 
 if (!isDev) {
-  baseConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    },
-    parallel: true
-  }))
+  baseConfig.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      parallel: true
+    })
+  )
 } else {
   baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
