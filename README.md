@@ -1,9 +1,9 @@
-#gaia项目多页应用webpack构建
+# gaia项目多页应用webpack构建
 
-##拟定目录结构
+## 拟定目录结构
 
 build : 项目构建
-src： 项目文件目录
+src： 项目文件目录 src/pages 项目业务代码 /src/common第三方库
 test： 测试模板
 
 ## 操作
