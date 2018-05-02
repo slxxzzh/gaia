@@ -1,6 +1,10 @@
 import moduleA from 'common/js/module'
 import 'common/css/global.less'
 import '../css/a.less'
+const E = require('wangeditor')
+
+let editor = new E('#editor')
+editor.create()
 
 console.log('i am a')
 console.log(moduleA)

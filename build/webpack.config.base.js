@@ -134,13 +134,6 @@ const baseConfig = {
         NODE_ENV: isDev ? '"development"' : '"production"'
       }
     }),
-    // css treeshaking
-    new PurifyCss({
-      paths: glob.sync([
-        path.join(__dirname, './src/*.js'),
-        path.join(__dirname, './src/*.html')
-      ])
-    }),
     new ExtractTextWebpack({
       filename: 'css/[name].[hash].css'
     }),
@@ -153,8 +146,8 @@ const baseConfig = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      "window.jQuery": 'jquery'
-    }),
+      'window.jQuery': 'jquery'
+    })
 
     // new CopyWebpackPlugin([
     //   {
@@ -172,6 +165,13 @@ if (!isDev) {
         warnings: false
       },
       parallel: true
+    }),
+    // css treeshaking
+    new PurifyCss({
+      paths: glob.sync([
+        path.join(__dirname, '../src/common/js/*.js'),
+        path.join(__dirname, '../src/*.html')
+      ])
     })
   )
 } else {

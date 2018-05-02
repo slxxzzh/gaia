@@ -31,8 +31,8 @@ const pages = [
   generatePage({
     title: 'TEST',
     entry: {
-      testa: [resolve('/src/pages/pageA/js/a.js'),resolve('/src/pages/pageA/js/testa.js')],
-      testb: [resolve('/src/pages/pageB/js/b.js'),resolve('/src/pages/pageB/js/testb.js')]
+      testa: [resolve('/src/pages/pageA/js/a.js'), resolve('/src/pages/pageA/js/testa.js')],
+      testb: [resolve('/src/pages/pageB/js/b.js'), resolve('/src/pages/pageB/js/testb.js')]
     },
     name: 'TEST',
     chunks: ['testa', 'testb']

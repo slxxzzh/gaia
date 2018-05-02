@@ -50,7 +50,7 @@ const baseConfig = {
         loader: 'babel-loader'
       },
       {
-        test: /\.less$/,
+        test: /\.(less|css)$/,
         use: cssLoader
       }
     ]
