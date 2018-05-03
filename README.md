@@ -6,6 +6,24 @@
 * src： 项目文件目录 /src/pages 项目业务代码 /src/common第三方库 公共css
 * test： 测试模板
 
+gaia
+├── build/
+│   ├── webpack.config.base.js
+│   |
+│   └── webpack.config.test.js
+├── test/
+└── src/
+    ├── common/
+    |      ├── css/
+    |      └── js/
+    └── pages/
+          ├── pageA/
+          |     ├── css/
+          |     ├── js/
+          |     └── pageA.html
+          └── pageB/
+
+
 ## 操作
 * npm run server 开启本地项目 默认访问为9000端口下具体页面
 * npm run build 构建应用
