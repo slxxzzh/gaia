@@ -64,7 +64,7 @@ const fileLoader = path => {
       {
         loader: 'file-loader',
         options: {
-          name: 'css/images/[name]-[hash:5].[ext]'
+          name: `${path}/[name]-[hash:5].[ext]`
         }
       }
     ]
@@ -72,7 +72,7 @@ const fileLoader = path => {
       {
         loader: 'url-loader',
         options: {
-          name: 'css/images/[name]-[hash:5].[ext]',
+          name: `${path}/[name]-[hash:5].[ext]`,
           limit: 1000
         }
       }
@@ -111,7 +111,7 @@ const baseConfig = {
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
-        use: fileLoader().concat(
+        use: fileLoader('css/images').concat(
           !isDev
             ? {
               loader: 'img-loader'
@@ -122,7 +122,7 @@ const baseConfig = {
 
       {
         test: /\.(eot|woff2?|ttf|svg)$/,
-        use: fileLoader()
+        use: fileLoader('css/font')
       }
     ]
   },
