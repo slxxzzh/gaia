@@ -1,4 +1,5 @@
 import moduleA from 'common/js/module'
+import LiveContral from './components.js'
 import 'common/css/video-js.css'
 import 'common/css/global.less'
 import '../css/a.less'
@@ -58,11 +59,26 @@ var options = {
   language: 'zh-CN'
 }
 
-var player = videojs('my-player', options, function onPlayerReady () {
+var player1 = videojs('my-player1', options, function onPlayerReady () {
   videojs.log('Your player is ready!')
+  player1.controlBar.addChild('LiveContral', { text: '1080P CRF23' }, 5)
+  player1.controlBar.addChild('LogoControl')
   this.on('ended', function () {
     videojs.log('Awww...over so soon?!')
   })
 })
-console.log(player.currentTime())
+
+var player2 = videojs('my-player2', options, function onPlayerReady () {
+  videojs.log('Your player is ready!')
+  player2.controlBar.addChild('LiveContral', { text: '1080P CRF23' }, 5)
+  player2.controlBar.addChild('LogoControl')
+  this.on('ended', function () {
+    videojs.log('Awww...over so soon?!')
+  })
+})
+$('#btn').click(() => {
+  player1.play()
+  player2.play()
+})
+console.log(player.controlBar)
 export { hello }
