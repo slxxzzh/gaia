@@ -80,7 +80,6 @@ const fileLoader = path => {
 }
 const baseConfig = {
   entry: {
-    vender: ['jquery'],
     global: resolve('src/common/js/global.js')
   },
 
@@ -140,15 +139,15 @@ const baseConfig = {
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['vender', 'global'],
+      name: ['global', 'vender'],
       minChunks: Infinity
     }),
     // 引用jq
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
-    }),
+    // new webpack.ProvidePlugin({
+    //   $: 'jquery',
+    //   jQuery: 'jquery',
+    //   'window.jQuery': 'jquery'
+    // }),
 
     new CopyWebpackPlugin([
       {

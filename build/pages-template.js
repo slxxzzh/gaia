@@ -4,6 +4,7 @@ const path = require('path')
 const resolve = function (dir) {
   return path.join(__dirname, '..', dir)
 }
+const isDev = process.env.NODE_ENV === 'development'
 
 const generatePage = function ({
   title = '',
@@ -11,8 +12,10 @@ const generatePage = function ({
   template = '',
   name = '',
   hash = true,
+  inject = true,
   chunks = ['vender']
 } = {}) {
+  inject = isDev ? true : inject
   return {
     entry,
     plugins: [
@@ -20,6 +23,7 @@ const generatePage = function ({
         chunks,
         template,
         title,
+        inject,
         hash,
         filename: name + '.html'
       })
@@ -33,8 +37,11 @@ const pages = [
     entry: {
       a: resolve('/src/pages/pageA/js/a.js')
     },
+    inject: {
+      path: ''
+    },
     template: resolve('/src/pages/pageA/indexA.html'),
-    name: 'a',
+    name: 'login/a',
     chunks: ['vender', 'global', 'a']
   }),
 
@@ -57,5 +64,6 @@ const pages = [
     name: 'c',
     chunks: ['vender', 'global', 'c']
   })
+
 ]
 module.exports = pages

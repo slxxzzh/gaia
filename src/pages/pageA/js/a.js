@@ -6,8 +6,8 @@ import '../css/a.less'
 import '../../../components/footer/css/footer.less'
 // 引用中文路径
 import 'common/js/lang/zh-CN.js'
-const E = require('wangeditor')
 
+var E = window.wangEditor
 let editor = new E('#editor')
 editor.create()
 
@@ -81,5 +81,5 @@ $('#btn').click(() => {
   player1.play()
   player2.play()
 })
-console.log(player.controlBar)
+console.log(player1.controlBar)
 export { hello }
