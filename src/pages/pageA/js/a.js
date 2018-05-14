@@ -1,8 +1,9 @@
 import moduleA from 'common/js/module'
-import LiveContral from './components.js'
+import './components.js'
 import 'common/css/video-js.css'
 import 'common/css/global.less'
 import '../css/a.less'
+import '../../../components/footer/css/footer.less'
 // 引用中文路径
 import 'common/js/lang/zh-CN.js'
 const E = require('wangeditor')

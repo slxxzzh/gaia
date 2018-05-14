@@ -21,7 +21,7 @@ var LiveContral = videojs.extend(Component, {
       className: 'vjs-live-control vjs-control'
     })
     let vjsLiveDisplay = videojs.dom.createEl('div', {
-      className: 'vjs-live-display',
+      className: 'vjs-live-display'
       // innerHTML: '1080P CRF23'
     })
     vjsLiveControl.appendChild(vjsLiveDisplay)
@@ -55,7 +55,7 @@ var LogoControl = videojs.extend(Component, {
       title: '返回首页'
     })
     return vjsLogoControl
-  },
+  }
 })
 // 在videojs中注册这个组件，才可以使用哦.
 videojs.registerComponent('LiveContral', LiveContral)

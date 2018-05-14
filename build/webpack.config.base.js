@@ -2,7 +2,7 @@
 const merge = require('webpack-merge')
 const webpack = require('webpack')
 const ExtractTextWebpack = require('extract-text-webpack-plugin')
-// const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const pages = require('./pages-template.js')
 const PurifyCss = require('purifycss-webpack')
@@ -94,7 +94,8 @@ const baseConfig = {
     extensions: ['.js'],
     alias: {
       '@': resolve('src/pages'),
-      common: resolve('src/common')
+      common: resolve('src/common'),
+      components: resolve('src/components')
     }
   },
   devServer,
@@ -147,14 +148,14 @@ const baseConfig = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
-    })
+    }),
 
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: resolve('src/common/js/jquery-ui.min.js'),
-    //     to: resolve('dist/js'),
-    //   }
-    // ])
+    new CopyWebpackPlugin([
+      {
+        from: resolve('src/components/footer/footer.html'),
+        to: resolve('dist/components/footer.html'),
+      }
+    ])
   ]
 }
 
@@ -169,8 +170,7 @@ if (!isDev) {
     // css treeshaking
     new PurifyCss({
       paths: glob.sync([
-        path.join(__dirname, '../src/common/js/*.js'),
-        path.join(__dirname, '../src/*.html')
+        path.join(__dirname, '../src/common/js/global.js')
       ])
     })
   )
